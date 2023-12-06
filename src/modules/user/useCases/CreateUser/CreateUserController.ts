@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import CreateUserUseCase from './CreateUserUseCase';
+import EmailRegex from '../../../../helpers/EmailRegex';
 
 class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
@@ -8,6 +9,16 @@ class CreateUserController {
     const { email, username, password, confirmPassword } = req.body;
 
     try {
+      if (!email) {
+        return res.status(422).json({ message: 'O e-mail é obrigatório.' });
+      }
+
+      if (!EmailRegex.handleEmailRegex(email)) {
+        return res
+          .status(422)
+          .json({ message: 'Insira, por favor, um e-mail válido.' });
+      }
+
       const user = await this.createUserUseCase.execute({
         email,
         username,
