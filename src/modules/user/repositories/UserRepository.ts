@@ -13,7 +13,6 @@ class UserRepository implements IUserRepository {
     confirmPassword,
   }: ICreateUserDTO): Promise<IUser> {
     const test = { email, username, password, confirmPassword };
-    console.log(test);
     return test;
   }
 }
