@@ -10,9 +10,8 @@ class UserRepository implements IUserRepository {
     email,
     username,
     password,
-    confirmPassword,
   }: ICreateUserDTO): Promise<IUser> {
-    const newUser = { email, username, password, confirmPassword };
+    const newUser = { email, username, password };
 
     await User.create(newUser);
     return newUser;

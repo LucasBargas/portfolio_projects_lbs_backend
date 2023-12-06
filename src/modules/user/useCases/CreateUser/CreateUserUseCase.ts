@@ -5,23 +5,17 @@ interface IRequest {
   email: string;
   username: string;
   password: string;
-  confirmPassword: string;
+  // confirmPassword: string;
 }
 
 class CreateUserUseCase {
   constructor(private userRepository: IUserRepository) {}
 
-  async execute({
-    email,
-    username,
-    password,
-    confirmPassword,
-  }: IRequest): Promise<IUser> {
+  async execute({ email, username, password }: IRequest): Promise<IUser> {
     return await this.userRepository.createUser({
       email,
       username,
       password,
-      confirmPassword,
     });
   }
 }

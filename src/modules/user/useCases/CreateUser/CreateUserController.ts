@@ -52,15 +52,13 @@ class CreateUserController {
       const salt = await bcrypt.genSalt(12);
       const passwordHash = await bcrypt.hash(password, salt);
 
-      const newUser = {
+      const user = await this.createUserUseCase.execute({
         email,
         username,
         password: passwordHash,
-        confirmPassword,
-      };
+      });
 
-      const user = await this.createUserUseCase.execute(newUser);
-      const token = await CreateUserToken.handleCreateUserToken(newUser);
+      const token = await CreateUserToken.handleCreateUserToken(user);
 
       return res.status(201).json({ user, token });
     } catch (error) {
