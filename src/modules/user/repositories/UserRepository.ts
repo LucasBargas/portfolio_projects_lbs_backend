@@ -1,6 +1,6 @@
 // import mongoose from 'mongoose';
 import { IUserRepository, ICreateUserDTO } from './IUserRepository';
-// import { User } from '../models/User';
+import { User } from '../models/User';
 import { IUser } from '../models/IUser';
 
 class UserRepository implements IUserRepository {
@@ -12,8 +12,10 @@ class UserRepository implements IUserRepository {
     password,
     confirmPassword,
   }: ICreateUserDTO): Promise<IUser> {
-    const test = { email, username, password, confirmPassword };
-    return test;
+    const newUser = { email, username, password, confirmPassword };
+
+    await User.create(newUser);
+    return newUser;
   }
 }
 
