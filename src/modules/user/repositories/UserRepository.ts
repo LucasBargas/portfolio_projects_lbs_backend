@@ -6,12 +6,8 @@ import { IUser } from '../models/IUser';
 class UserRepository implements IUserRepository {
   constructor() {}
 
-  async createUser({
-    email,
-    username,
-    password,
-  }: ICreateUserDTO): Promise<IUser> {
-    const newUser = { email, username, password };
+  async createUser({ username, password }: ICreateUserDTO): Promise<IUser> {
+    const newUser = { username, password };
 
     await User.create(newUser);
     return newUser;

@@ -7,13 +7,30 @@ export default class RegisterValidations {
         .isString()
         .withMessage('O nome é obrigatório.')
         .isLength({ min: 3 })
-        .withMessage('O nome precisa ter no mínimo 3 caracteres'),
+        .withMessage('O nome precisa ter no mínimo 3 caracteres')
+        .custom((value) => {
+          if (value.includes('.com')) {
+            throw new Error('O nome de usuário não pode incluir ".com"');
+          }
 
-      body('email')
-        .isString()
-        .withMessage('O e-mail é obrigatório')
-        .isEmail()
-        .withMessage('Insira uma e-mail válido'),
+          if (value.includes('-')) {
+            throw new Error(
+              'O nome de usuário não pode incluir hífens(-), somente sublinhado(_)',
+            );
+          }
+
+          if (/[A-Z]/.test(value)) {
+            throw new Error(
+              'O nome de usuário não pode conter letras maiúsculas, por favor, use somente minúsculas',
+            );
+          }
+
+          if (/\s/g.test(value)) {
+            throw new Error('O nome de usuário não pode conter espaços');
+          }
+
+          return true;
+        }),
 
       body('password')
         .isString()
