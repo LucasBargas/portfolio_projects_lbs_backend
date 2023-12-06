@@ -1,32 +1,34 @@
 import { Request, Response } from 'express';
-import CreateUserUseCase from './CreateUserUseCase';
+import LoginUserUseCase from './LoginUserUseCase';
 import bcrypt from 'bcrypt';
 import CreateUserToken from '../../../../helpers/CreateUserToken';
 import { User } from '../../models/User';
 
 class CreateUserController {
-  constructor(private createUserUseCase: CreateUserUseCase) {}
+  constructor(private loginUserUseCase: LoginUserUseCase) {}
 
   async handle(req: Request, res: Response) {
     const { username, password } = req.body;
 
     try {
-      const usernameAlreadyUsed = await User.findOne({ username });
+      const user = await User.findOne({ username });
 
-      if (usernameAlreadyUsed) {
+      if (!user) {
         return res.status(422).json({
-          errors: ['Nome de usuário já cadastrado! Por favor, defina outro'],
+          errors: ['Não há usuário cadastrado com este nome de usuário'],
         });
       }
 
-      const salt = await bcrypt.genSalt(12);
-      const passwordHash = await bcrypt.hash(password, salt);
+      // Check if password match with db password
+      const checkPassword = await bcrypt.compare(password, user.password);
 
-      const user = await this.createUserUseCase.execute({
-        username,
-        password: passwordHash,
-      });
+      if (!checkPassword) {
+        return res.status(422).json({
+          errors: ['A senha inserida é inválida.'],
+        });
+      }
 
+      await this.loginUserUseCase.execute(user);
       const token = await CreateUserToken.handleCreateUserToken(user);
 
       return res
