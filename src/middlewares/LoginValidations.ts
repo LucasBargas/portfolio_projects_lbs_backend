@@ -5,28 +5,32 @@ export default class LoginValidations {
     return [
       body('username')
         .isString()
-        .withMessage('O nome é obrigatório.')
+        .withMessage('O nome de usuário é obrigatório.')
         .isLength({ min: 3 })
-        .withMessage('O nome precisa ter no mínimo 3 caracteres')
+        .withMessage('O nome de usuário precisa ter no mínimo 3 caracteres')
         .custom((value) => {
           if (value.includes('.com')) {
-            throw new Error('O nome de usuário não pode incluir ".com"');
+            throw new Error(
+              'O nome de usuário de usuário não pode incluir ".com"',
+            );
           }
 
           if (value.includes('-')) {
             throw new Error(
-              'O nome de usuário não pode incluir hífens(-), somente sublinhado(_)',
+              'O nome de usuário de usuário não pode incluir hífens(-), somente sublinhado(_)',
             );
           }
 
           if (/[A-Z]/.test(value)) {
             throw new Error(
-              'O nome de usuário não pode conter letras maiúsculas, por favor, use somente minúsculas',
+              'O nome de usuário de usuário não pode conter letras maiúsculas, por favor, use somente minúsculas',
             );
           }
 
           if (/\s/g.test(value)) {
-            throw new Error('O nome de usuário não pode conter espaços');
+            throw new Error(
+              'O nome de usuário de usuário não pode conter espaços',
+            );
           }
 
           return true;
