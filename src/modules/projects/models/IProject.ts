@@ -10,5 +10,5 @@ export interface IProject extends Partial<Document> {
   categories: string[];
   appLink: string;
   gitHub: string;
-  recycling: boolean;
+  trash: boolean;
 }

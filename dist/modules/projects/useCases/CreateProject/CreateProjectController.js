@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const Project_1 = require("../../models/Project");
 class CreateProjectController {
     constructor(createProjectUseCase) {
         this.createProjectUseCase = createProjectUseCase;
@@ -16,9 +17,17 @@ class CreateProjectController {
     handle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { title, description, appLink, gitHub, categories } = req.body;
-            const photos = req.files;
             const recycling = false;
             try {
+                const photos = req.files;
+                const titleAlreadyUsed = yield Project_1.Project.findOne({ title });
+                if (titleAlreadyUsed) {
+                    return res.status(422).json({
+                        errors: [
+                            'Já existe um projeto com este título! Por favor, defina outro',
+                        ],
+                    });
+                }
                 const newProject = {
                     photos: [],
                     title,
@@ -30,7 +39,7 @@ class CreateProjectController {
                 };
                 photos.forEach((photo) => newProject.photos.push({
                     filename: photo.filename,
-                    destination: photo.destination,
+                    destination: `/uploads/thumbs/${photo.filename}`,
                 }));
                 this.createProjectUseCase.execute(newProject);
                 return res.status(201).json({
@@ -39,7 +48,7 @@ class CreateProjectController {
                 });
             }
             catch (error) {
-                return res.status(422).json({ message: error });
+                return res.status(422).json({ errors: error });
             }
         });
     }

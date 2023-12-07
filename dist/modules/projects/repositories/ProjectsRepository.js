@@ -14,17 +14,33 @@ class ProjectsRepository {
     constructor() { }
     createProject({ photos, title, description, categories, appLink, gitHub, recycling, }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newProject = {
-                photos,
-                title,
-                description,
-                categories,
-                appLink,
-                gitHub,
-                recycling,
-            };
-            yield Project_1.Project.create(newProject);
-            return newProject;
+            try {
+                const newProject = {
+                    photos,
+                    title,
+                    description,
+                    categories,
+                    appLink,
+                    gitHub,
+                    recycling,
+                };
+                yield Project_1.Project.create(newProject);
+                return newProject;
+            }
+            catch (error) {
+                return error;
+            }
+        });
+    }
+    ListProjects() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const projects = yield Project_1.Project.find().sort('-createdAt');
+                return projects;
+            }
+            catch (error) {
+                return error;
+            }
         });
     }
 }

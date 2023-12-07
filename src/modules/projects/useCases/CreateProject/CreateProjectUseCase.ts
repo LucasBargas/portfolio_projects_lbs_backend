@@ -11,7 +11,7 @@ interface IRequest {
   categories: string[];
   appLink: string;
   gitHub: string;
-  recycling: boolean;
+  trash: boolean;
 }
 
 class CreateProjectUseCase {
@@ -24,7 +24,7 @@ class CreateProjectUseCase {
     categories,
     appLink,
     gitHub,
-    recycling,
+    trash,
   }: IRequest): Promise<IProject> {
     return await this.projectRepositoru.createProject({
       photos,
@@ -33,7 +33,7 @@ class CreateProjectUseCase {
       categories,
       appLink,
       gitHub,
-      recycling,
+      trash,
     });
   }
 }

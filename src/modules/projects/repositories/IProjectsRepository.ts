@@ -10,7 +10,7 @@ export interface IProjectDTO {
   categories: string[];
   appLink: string;
   gitHub: string;
-  recycling: boolean;
+  trash: boolean;
 }
 
 export interface IProjectRepository {
@@ -21,7 +21,7 @@ export interface IProjectRepository {
     categories,
     appLink,
     gitHub,
-    recycling,
+    trash,
   }: IProjectDTO) => Promise<IProject>;
 
   ListProjects: () => Promise<IProject[]>;

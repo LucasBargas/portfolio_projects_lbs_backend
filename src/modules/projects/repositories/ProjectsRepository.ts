@@ -12,7 +12,7 @@ class ProjectsRepository implements IProjectRepository {
     categories,
     appLink,
     gitHub,
-    recycling,
+    trash,
   }: IProjectDTO): Promise<IProject> {
     try {
       const newProject = {
@@ -22,7 +22,7 @@ class ProjectsRepository implements IProjectRepository {
         categories,
         appLink,
         gitHub,
-        recycling,
+        trash,
       };
 
       await Project.create(newProject);

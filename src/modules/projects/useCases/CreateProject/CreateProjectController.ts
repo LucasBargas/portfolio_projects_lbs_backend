@@ -7,7 +7,7 @@ class CreateProjectController {
 
   async handle(req: Request, res: Response) {
     const { title, description, appLink, gitHub, categories } = req.body;
-    const recycling = false;
+    const trash = false;
 
     try {
       const photos = req.files as Express.Multer.File[];
@@ -28,7 +28,7 @@ class CreateProjectController {
         categories,
         appLink,
         gitHub,
-        recycling,
+        trash,
       };
 
       photos.forEach((photo) =>

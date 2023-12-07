@@ -9,7 +9,7 @@ const projectsSchema = new Schema<IProject>(
     categories: { type: [String], required: true },
     appLink: { type: String, required: true },
     gitHub: { type: String, required: true },
-    recycling: { type: Boolean, required: true },
+    trash: { type: Boolean, required: true },
   },
   { timestamps: true },
 );
