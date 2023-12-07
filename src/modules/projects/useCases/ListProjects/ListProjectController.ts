@@ -14,9 +14,7 @@ class ListProjectController {
         });
       }
 
-      return res
-        .status(201)
-        .json(projects.filter((project) => !project.trash && project));
+      return res.status(201).json(projects);
     } catch (error) {
       return res.status(422).json({
         errors: [error],

@@ -1,6 +1,7 @@
 import { IProjectRepository, IProjectDTO } from './IProjectsRepository';
 import { IProject } from '../models/IProject';
 import { Project } from '../models/Project';
+import mongoose from 'mongoose';
 
 class ProjectsRepository implements IProjectRepository {
   constructor() {}
@@ -34,8 +35,22 @@ class ProjectsRepository implements IProjectRepository {
 
   async ListProjects(): Promise<IProject[]> {
     try {
-      const projects = await Project.find().sort('-createdAt');
+      const projects = await Project.find({ trash: false }).sort('-createdAt');
       return projects;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async ProjectInTrashById(id: string): Promise<IProject> {
+    try {
+      const objId = new mongoose.Types.ObjectId(id);
+      const project = await Project.findById(objId);
+
+      project.trash = project.trash ? false : true;
+
+      await project.save();
+      return project;
     } catch (error) {
       return error;
     }
