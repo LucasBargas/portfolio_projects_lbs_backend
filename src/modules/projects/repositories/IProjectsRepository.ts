@@ -25,4 +25,6 @@ export interface IProjectRepository {
   }: IProjectDTO) => Promise<IProject>;
 
   ListProjects: () => Promise<IProject[]>;
+
+  ProjectInTrashById: (id: string) => Promise<IProject>;
 }

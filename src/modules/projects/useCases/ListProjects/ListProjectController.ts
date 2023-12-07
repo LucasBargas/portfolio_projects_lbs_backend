@@ -16,7 +16,7 @@ class ListProjectController {
 
       return res
         .status(201)
-        .json(projects.filter((project) => !project.recycling && project));
+        .json(projects.filter((project) => !project.trash && project));
     } catch (error) {
       return res.status(422).json({
         errors: [error],
