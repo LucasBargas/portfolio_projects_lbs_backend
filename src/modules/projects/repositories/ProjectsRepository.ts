@@ -5,10 +5,6 @@ import { Project } from '../models/Project';
 class ProjectsRepository implements IProjectRepository {
   constructor() {}
 
-  AddCategories(categories: string[]) {
-    return categories;
-  }
-
   async createProject({
     photos,
     title,
@@ -28,7 +24,6 @@ class ProjectsRepository implements IProjectRepository {
       recycling,
     };
 
-    this.AddCategories(categories);
     await Project.create(newProject);
     return newProject;
   }
