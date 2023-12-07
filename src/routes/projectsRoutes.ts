@@ -8,7 +8,7 @@ const router = express.Router();
 router.post(
   '/create',
   CheckToken.handleCheckToken,
-  imageUpload.array('photos', 5),
+  imageUpload.array('photos'),
   async (req: Request, res: Response) => {
     return await createProjectController.handle(req, res);
   },

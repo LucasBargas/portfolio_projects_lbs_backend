@@ -24,7 +24,7 @@ class CreateProjectController {
       photos.forEach((photo) =>
         newProject.photos.push({
           filename: photo.filename,
-          destination: photo.destination,
+          destination: `/uploads/thumbs/${photo.filename}`,
         }),
       );
 
