@@ -45,7 +45,7 @@ class CreateProjectController {
         newProject,
       });
     } catch (error) {
-      return res.status(422).json({ messages: error });
+      return res.status(422).json({ errors: error });
     }
   }
 }

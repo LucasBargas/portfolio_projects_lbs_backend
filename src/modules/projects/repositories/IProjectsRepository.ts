@@ -23,4 +23,6 @@ export interface IProjectRepository {
     gitHub,
     recycling,
   }: IProjectDTO) => Promise<IProject>;
+
+  ListProjects: () => Promise<IProject[]>;
 }

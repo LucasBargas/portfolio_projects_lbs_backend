@@ -14,18 +14,31 @@ class ProjectsRepository implements IProjectRepository {
     gitHub,
     recycling,
   }: IProjectDTO): Promise<IProject> {
-    const newProject = {
-      photos,
-      title,
-      description,
-      categories,
-      appLink,
-      gitHub,
-      recycling,
-    };
+    try {
+      const newProject = {
+        photos,
+        title,
+        description,
+        categories,
+        appLink,
+        gitHub,
+        recycling,
+      };
 
-    await Project.create(newProject);
-    return newProject;
+      await Project.create(newProject);
+      return newProject;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async ListProjects(): Promise<IProject[]> {
+    try {
+      const projects = await Project.find().sort('-createdAt');
+      return projects;
+    } catch (error) {
+      return error;
+    }
   }
 }
 
