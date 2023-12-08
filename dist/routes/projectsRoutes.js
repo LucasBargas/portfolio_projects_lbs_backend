@@ -19,12 +19,16 @@ const CheckToken_1 = __importDefault(require("../middlewares/CheckToken"));
 // import ProjectValidations from '../middlewares/ProjectValidations';
 const imageUpload_1 = __importDefault(require("../middlewares/imageUpload"));
 const ListProjects_1 = __importDefault(require("../modules/projects/useCases/ListProjects"));
+const ProjectInTrashById_1 = __importDefault(require("../modules/projects/useCases/ProjectInTrashById"));
 const router = express_1.default.Router();
 router.post('/create', CheckToken_1.default.handleCheckToken, 
 // ProjectValidations.handleProjectValidations(),
 // Validate.handleValidate,
 imageUpload_1.default.array('photos'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return yield CreateProject_1.default.handle(req, res);
+}));
+router.patch('/trash/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield ProjectInTrashById_1.default.handle(req, res);
 }));
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return yield ListProjects_1.default.handle(req, res);

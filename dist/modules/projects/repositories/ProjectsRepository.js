@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Project_1 = require("../models/Project");
 const mongoose_1 = __importDefault(require("mongoose"));
+const Project_1 = require("../models/Project");
 class ProjectsRepository {
     constructor() { }
     createProject({ photos, title, description, categories, appLink, gitHub, trash, }) {

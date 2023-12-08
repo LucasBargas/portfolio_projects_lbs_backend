@@ -6,6 +6,7 @@ import CheckToken from '../middlewares/CheckToken';
 import imageUpload from '../middlewares/imageUpload';
 import listProjectController from '../modules/projects/useCases/ListProjects';
 import projectInTrashByIdController from '../modules/projects/useCases/ProjectInTrashById';
+import listProjectInTrashController from '../modules/projects/useCases/ListProjectsInTrash';
 
 const router = express.Router();
 
@@ -22,6 +23,10 @@ router.post(
 
 router.patch('/trash/:id', async (req: Request, res: Response) => {
   return await projectInTrashByIdController.handle(req, res);
+});
+
+router.get('/trash', async (req: Request, res: Response) => {
+  return await listProjectInTrashController.handle(req, res);
 });
 
 router.get('/', async (req: Request, res: Response) => {
