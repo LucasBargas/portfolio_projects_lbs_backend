@@ -1,0 +1,14 @@
+{
+  "files.exclude": {
+    ".vscode": true,
+    "node_modules": true,
+    ".eslintrc.js": true,
+    ".editorconfig": true,
+    ".prettierrc.js": true,
+    "package-lock.json": true,
+    "package.json": true,
+    "tsconfig.json": true,
+    ".gitignore": true,
+    ".git": true,
+  }
+}

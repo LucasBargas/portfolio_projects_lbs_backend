@@ -14,7 +14,10 @@ class ListProjectsInTrashController {
         });
       }
 
-      return res.status(201).json(projects);
+      return res.status(201).json({
+        total: projects.length,
+        projects,
+      });
     } catch (error) {
       return res
         .status(422)
