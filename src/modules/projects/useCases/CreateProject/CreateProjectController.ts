@@ -45,7 +45,9 @@ class CreateProjectController {
         newProject,
       });
     } catch (error) {
-      return res.status(422).json({ errors: error });
+      return res
+        .status(422)
+        .json({ errors: ['Houve um erro, tente novamente mais tarde!'] });
     }
   }
 }

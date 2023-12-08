@@ -35,7 +35,7 @@ class CreateUserController {
     } catch (error) {
       return res
         .status(422)
-        .json({ message: 'Houve um erro, tente novamente mais tarde!' });
+        .json({ errors: ['Houve um erro, tente novamente mais tarde!'] });
     }
   }
 }

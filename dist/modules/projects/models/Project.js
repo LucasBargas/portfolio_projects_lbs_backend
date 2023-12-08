@@ -9,6 +9,6 @@ const projectsSchema = new mongoose_1.Schema({
     categories: { type: [String], required: true },
     appLink: { type: String, required: true },
     gitHub: { type: String, required: true },
-    recycling: { type: Boolean, required: true },
+    trash: { type: Boolean, required: true },
 }, { timestamps: true });
 exports.Project = (0, mongoose_1.model)('Projects', projectsSchema);

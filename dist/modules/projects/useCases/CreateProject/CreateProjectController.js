@@ -17,7 +17,7 @@ class CreateProjectController {
     handle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { title, description, appLink, gitHub, categories } = req.body;
-            const recycling = false;
+            const trash = false;
             try {
                 const photos = req.files;
                 const titleAlreadyUsed = yield Project_1.Project.findOne({ title });
@@ -35,7 +35,7 @@ class CreateProjectController {
                     categories,
                     appLink,
                     gitHub,
-                    recycling,
+                    trash,
                 };
                 photos.forEach((photo) => newProject.photos.push({
                     filename: photo.filename,

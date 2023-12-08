@@ -13,7 +13,7 @@ class CreateProjectUseCase {
     constructor(projectRepositoru) {
         this.projectRepositoru = projectRepositoru;
     }
-    execute({ photos, title, description, categories, appLink, gitHub, recycling, }) {
+    execute({ photos, title, description, categories, appLink, gitHub, trash, }) {
         return __awaiter(this, void 0, void 0, function* () {
             return yield this.projectRepositoru.createProject({
                 photos,
@@ -22,7 +22,7 @@ class CreateProjectUseCase {
                 categories,
                 appLink,
                 gitHub,
-                recycling,
+                trash,
             });
         });
     }

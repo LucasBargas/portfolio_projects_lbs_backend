@@ -1,7 +1,7 @@
+import mongoose from 'mongoose';
 import { IProjectRepository, IProjectDTO } from './IProjectsRepository';
 import { IProject } from '../models/IProject';
 import { Project } from '../models/Project';
-import mongoose from 'mongoose';
 
 class ProjectsRepository implements IProjectRepository {
   constructor() {}
