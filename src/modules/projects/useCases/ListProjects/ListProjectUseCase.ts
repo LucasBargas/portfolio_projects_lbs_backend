@@ -5,7 +5,7 @@ class ListProjectUseCase {
   constructor(private projectRepository: IProjectRepository) {}
 
   async execute(): Promise<IProject[]> {
-    return await this.projectRepository.ListProjects();
+    return await this.projectRepository.listProjects();
   }
 }
 

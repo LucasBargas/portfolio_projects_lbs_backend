@@ -5,7 +5,6 @@ import { Project } from '../models/Project';
 
 class ProjectsRepository implements IProjectRepository {
   constructor() {}
-  ProjectsInTrashById: (id: string) => Promise<IProject>;
 
   async createProject({
     photos,
@@ -34,7 +33,35 @@ class ProjectsRepository implements IProjectRepository {
     }
   }
 
-  async ListProjects(): Promise<IProject[]> {
+  async updateProjectById({
+    id,
+    photos,
+    title,
+    description,
+    categories,
+    appLink,
+    gitHub,
+  }: IProjectDTO): Promise<IProject> {
+    try {
+      const objId = new mongoose.Types.ObjectId(id);
+      const project = await Project.findById(objId);
+
+      project.photos = photos;
+      project.title = title;
+      project.description = description;
+      project.categories = categories;
+      project.appLink = appLink;
+      project.gitHub = gitHub;
+
+      console.log(project);
+      // await project.save();
+      return project;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async listProjects(): Promise<IProject[]> {
     try {
       const projects = await Project.find({ trash: false }).sort('-createdAt');
       return projects;
@@ -43,7 +70,7 @@ class ProjectsRepository implements IProjectRepository {
     }
   }
 
-  async ListProjectsInTrash(): Promise<IProject[]> {
+  async listProjectsInTrash(): Promise<IProject[]> {
     try {
       const projects = await Project.find({ trash: true }).sort('-createdAt');
       return projects;
@@ -52,7 +79,7 @@ class ProjectsRepository implements IProjectRepository {
     }
   }
 
-  async ProjectById(id: string): Promise<IProject> {
+  async projectById(id: string): Promise<IProject> {
     try {
       const objId = new mongoose.Types.ObjectId(id);
       const project = await Project.findById(objId);
@@ -63,7 +90,7 @@ class ProjectsRepository implements IProjectRepository {
     }
   }
 
-  async ProjectInTrashById(id: string): Promise<IProject> {
+  async projectInTrashById(id: string): Promise<IProject> {
     try {
       const objId = new mongoose.Types.ObjectId(id);
       const project = await Project.findById(objId);

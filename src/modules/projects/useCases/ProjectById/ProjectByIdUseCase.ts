@@ -5,7 +5,7 @@ class ProjectByIdUseCase {
   constructor(private projectRepository: IProjectRepository) {}
 
   async execute(id: string): Promise<IProject> {
-    return this.projectRepository.ProjectById(id);
+    return this.projectRepository.projectById(id);
   }
 }
 

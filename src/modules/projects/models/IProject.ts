@@ -1,6 +1,7 @@
 import { Document } from 'mongoose';
 
 export interface IProject extends Partial<Document> {
+  id?: string;
   photos: {
     filename: string;
     destination: string;
@@ -10,5 +11,5 @@ export interface IProject extends Partial<Document> {
   categories: string[];
   appLink: string;
   gitHub: string;
-  trash: boolean;
+  trash?: boolean;
 }

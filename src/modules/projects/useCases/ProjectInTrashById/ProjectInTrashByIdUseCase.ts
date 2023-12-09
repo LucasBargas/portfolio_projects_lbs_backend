@@ -5,7 +5,7 @@ class ProjectInTrashByIdUseCase {
   constructor(private projectRepository: IProjectRepository) {}
 
   async execute(id: string): Promise<IProject> {
-    return await this.projectRepository.ProjectInTrashById(id);
+    return await this.projectRepository.projectInTrashById(id);
   }
 }
 

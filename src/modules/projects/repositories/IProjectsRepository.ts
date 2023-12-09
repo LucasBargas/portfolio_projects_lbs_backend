@@ -1,6 +1,7 @@
 import { IProject } from '../models/IProject';
 
 export interface IProjectDTO {
+  id?: string;
   photos: {
     filename: string;
     destination: string;
@@ -21,14 +22,23 @@ export interface IProjectRepository {
     categories,
     appLink,
     gitHub,
-    trash,
   }: IProjectDTO) => Promise<IProject>;
 
-  ListProjects: () => Promise<IProject[]>;
+  updateProjectById: ({
+    id,
+    photos,
+    title,
+    description,
+    categories,
+    appLink,
+    gitHub,
+  }: IProjectDTO) => Promise<IProject>;
 
-  ListProjectsInTrash: () => Promise<IProject[]>;
+  listProjects: () => Promise<IProject[]>;
 
-  ProjectById: (id: string) => Promise<IProject>;
+  listProjectsInTrash: () => Promise<IProject[]>;
 
-  ProjectInTrashById: (id: string) => Promise<IProject>;
+  projectById: (id: string) => Promise<IProject>;
+
+  projectInTrashById: (id: string) => Promise<IProject>;
 }
