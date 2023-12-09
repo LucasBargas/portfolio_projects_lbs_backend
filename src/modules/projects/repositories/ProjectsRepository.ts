@@ -5,6 +5,7 @@ import { Project } from '../models/Project';
 
 class ProjectsRepository implements IProjectRepository {
   constructor() {}
+  ProjectsInTrashById: (id: string) => Promise<IProject>;
 
   async createProject({
     photos,

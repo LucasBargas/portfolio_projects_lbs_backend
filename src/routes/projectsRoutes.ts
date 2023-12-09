@@ -5,9 +5,9 @@ import CheckToken from '../middlewares/CheckToken';
 // import ProjectValidations from '../middlewares/ProjectValidations';
 import imageUpload from '../middlewares/imageUpload';
 import listProjectController from '../modules/projects/useCases/ListProjects';
-import projectInTrashByIdController from '../modules/projects/useCases/ProjectInTrashById';
+import projectInTrashByIdController from '../modules/projects/useCases/ProjectsInTrashById';
 import listProjectInTrashController from '../modules/projects/useCases/ListProjectsInTrash';
-import projectByIdController from '../modules/projects/useCases/ProjectById';
+import projectsByIdController from '../modules/projects/useCases/ProjectById';
 
 const router = express.Router();
 
@@ -31,7 +31,7 @@ router.get('/trash', async (req: Request, res: Response) => {
 });
 
 router.get('/:id', async (req: Request, res: Response) => {
-  return await projectByIdController.handle(req, res);
+  return await projectsByIdController.handle(req, res);
 });
 
 router.get('/', async (req: Request, res: Response) => {
