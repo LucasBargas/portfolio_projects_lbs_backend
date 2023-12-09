@@ -1,6 +1,6 @@
 import ProjectsRepository from '../../repositories/ProjectsRepository';
-import ProjectInTrashByIdUseCase from './ProjectInTrashByIdUseCase';
-import ProjectInTrashByIdController from './ProjectInTrashByIdController';
+import ProjectInTrashByIdUseCase from './ProjectsInTrashByIdUseCase';
+import ProjectInTrashByIdController from './ProjectsInTrashByIdController';
 
 const projectsRepository = new ProjectsRepository();
 const projectInTrashByIdUseCase = new ProjectInTrashByIdUseCase(
