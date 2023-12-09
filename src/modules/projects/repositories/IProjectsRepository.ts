@@ -1,5 +1,3 @@
-import { IProject } from '../models/IProject';
-
 export interface IProjectDTO {
   id?: string;
   photos: {
@@ -38,7 +36,7 @@ export interface IProjectRepository {
 
   listProjects: () => Promise<IProjectDTO[]>;
 
-  listProjectsInTrash: () => Promise<IProject[]>;
+  listProjectsInTrash: () => Promise<IProjectDTO[]>;
 
   projectById: (id: string) => Promise<IProjectDTO>;
 
