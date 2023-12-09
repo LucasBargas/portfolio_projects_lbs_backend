@@ -1,18 +1,7 @@
-import { IProject } from '../../models/IProject';
-import { IProjectRepository } from '../../repositories/IProjectsRepository';
-
-interface IRequest {
-  photos: {
-    filename: string;
-    destination: string;
-  }[];
-  title: string;
-  description: string;
-  categories: string[];
-  appLink: string;
-  gitHub: string;
-  trash: boolean;
-}
+import {
+  IProjectDTO,
+  IProjectRepository,
+} from '../../repositories/IProjectsRepository';
 
 class CreateProjectUseCase {
   constructor(private projectRepositoru: IProjectRepository) {}
@@ -25,7 +14,7 @@ class CreateProjectUseCase {
     appLink,
     gitHub,
     trash,
-  }: IRequest): Promise<IProject> {
+  }: IProjectDTO): Promise<IProjectDTO> {
     return await this.projectRepositoru.createProject({
       photos,
       title,

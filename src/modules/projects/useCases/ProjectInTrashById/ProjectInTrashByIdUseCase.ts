@@ -1,10 +1,12 @@
-import { IProject } from '../../models/IProject';
-import { IProjectRepository } from '../../repositories/IProjectsRepository';
+import {
+  IProjectDTO,
+  IProjectRepository,
+} from '../../repositories/IProjectsRepository';
 
 class ProjectInTrashByIdUseCase {
   constructor(private projectRepository: IProjectRepository) {}
 
-  async execute(id: string): Promise<IProject> {
+  async execute(id: string): Promise<IProjectDTO> {
     return await this.projectRepository.projectInTrashById(id);
   }
 }

@@ -1,19 +1,7 @@
-import { IProjectRepository } from '../../repositories/IProjectsRepository';
-import { IProject } from '../../models/IProject';
-
-interface IRequest {
-  id: string;
-  photos: {
-    filename: string;
-    destination: string;
-  }[];
-  title: string;
-  description: string;
-  categories: string[];
-  appLink: string;
-  gitHub: string;
-  trash: boolean;
-}
+import {
+  IProjectDTO,
+  IProjectRepository,
+} from '../../repositories/IProjectsRepository';
 
 class UpdateProjectByIdUseCase {
   constructor(private projectRepository: IProjectRepository) {}
@@ -27,7 +15,7 @@ class UpdateProjectByIdUseCase {
     appLink,
     gitHub,
     trash,
-  }: IRequest): Promise<IProject> {
+  }: IProjectDTO): Promise<IProjectDTO> {
     return await this.projectRepository.updateProjectById({
       id,
       photos,

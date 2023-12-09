@@ -1,10 +1,12 @@
-import { IProject } from '../../models/IProject';
-import { IProjectRepository } from '../../repositories/IProjectsRepository';
+import {
+  IProjectDTO,
+  IProjectRepository,
+} from '../../repositories/IProjectsRepository';
 
 class ListProjectUseCase {
   constructor(private projectRepository: IProjectRepository) {}
 
-  async execute(): Promise<IProject[]> {
+  async execute(): Promise<IProjectDTO[]> {
     return await this.projectRepository.listProjects();
   }
 }

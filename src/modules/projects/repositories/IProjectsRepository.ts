@@ -11,7 +11,7 @@ export interface IProjectDTO {
   categories: string[];
   appLink: string;
   gitHub: string;
-  trash: boolean;
+  trash?: boolean;
 }
 
 export interface IProjectRepository {

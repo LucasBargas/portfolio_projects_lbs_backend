@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { IProjectRepository, IProjectDTO } from './IProjectsRepository';
-import { IProject } from '../models/IProject';
 import { Project } from '../models/Project';
 
 class ProjectsRepository implements IProjectRepository {
@@ -14,7 +13,7 @@ class ProjectsRepository implements IProjectRepository {
     appLink,
     gitHub,
     trash,
-  }: IProjectDTO): Promise<IProject> {
+  }: IProjectDTO): Promise<IProjectDTO> {
     try {
       const newProject = {
         photos,
@@ -41,7 +40,7 @@ class ProjectsRepository implements IProjectRepository {
     categories,
     appLink,
     gitHub,
-  }: IProjectDTO): Promise<IProject> {
+  }: IProjectDTO): Promise<IProjectDTO> {
     try {
       const objId = new mongoose.Types.ObjectId(id);
       const project = await Project.findById(objId);
@@ -61,7 +60,7 @@ class ProjectsRepository implements IProjectRepository {
     }
   }
 
-  async listProjects(): Promise<IProject[]> {
+  async listProjects(): Promise<IProjectDTO[]> {
     try {
       const projects = await Project.find({ trash: false }).sort('-createdAt');
       return projects;
@@ -70,7 +69,7 @@ class ProjectsRepository implements IProjectRepository {
     }
   }
 
-  async listProjectsInTrash(): Promise<IProject[]> {
+  async listProjectsInTrash(): Promise<IProjectDTO[]> {
     try {
       const projects = await Project.find({ trash: true }).sort('-createdAt');
       return projects;
@@ -79,7 +78,7 @@ class ProjectsRepository implements IProjectRepository {
     }
   }
 
-  async projectById(id: string): Promise<IProject> {
+  async projectById(id: string): Promise<IProjectDTO> {
     try {
       const objId = new mongoose.Types.ObjectId(id);
       const project = await Project.findById(objId);
@@ -90,7 +89,7 @@ class ProjectsRepository implements IProjectRepository {
     }
   }
 
-  async projectInTrashById(id: string): Promise<IProject> {
+  async projectInTrashById(id: string): Promise<IProjectDTO> {
     try {
       const objId = new mongoose.Types.ObjectId(id);
       const project = await Project.findById(objId);
