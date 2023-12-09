@@ -52,8 +52,7 @@ class ProjectsRepository implements IProjectRepository {
       project.appLink = appLink;
       project.gitHub = gitHub;
 
-      console.log(project);
-      // await project.save();
+      await project.save();
       return project;
     } catch (error) {
       return error;

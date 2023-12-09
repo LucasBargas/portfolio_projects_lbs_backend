@@ -1,20 +1,25 @@
+import mongoose from 'mongoose';
 import { Request, Response } from 'express';
-import CreateProjectUseCase from './CreateProjectUseCase';
+import UpdateProjectByIdUseCase from './UpdateProjectByIdUseCase';
 import { Project } from '../../models/Project';
 import { IProjectDTO } from '../../repositories/IProjectsRepository';
 
-class CreateProjectController {
-  constructor(private createProjectUseCase: CreateProjectUseCase) {}
+class UpdateProjectByIdController {
+  constructor(private updateProjectByIdUseCase: UpdateProjectByIdUseCase) {}
 
   async handle(req: Request, res: Response) {
+    const { id } = req.params;
     const { title, description, appLink, gitHub, categories } = req.body;
-    const trash = false;
 
     try {
+      const objId = new mongoose.Types.ObjectId(id);
+      const projectById = await Project.findById(objId);
       const photos = req.files as Express.Multer.File[];
       const titleAlreadyUsed = await Project.findOne({ title });
 
-      if (titleAlreadyUsed) {
+      console.log(projectById);
+
+      if (title && title !== projectById.title && titleAlreadyUsed) {
         return res.status(422).json({
           errors: [
             'Já existe um projeto com este título! Por favor, defina outro',
@@ -22,28 +27,28 @@ class CreateProjectController {
         });
       }
 
-      const newProject: IProjectDTO = {
+      const projectUpdated: IProjectDTO = {
+        id,
         photos: [],
         title,
         description,
         categories,
         appLink,
         gitHub,
-        trash,
       };
 
       photos.forEach((photo) =>
-        newProject.photos.push({
+        projectUpdated.photos.push({
           filename: photo.filename,
           destination: `/uploads/thumbs/${photo.filename}`,
         }),
       );
 
-      this.createProjectUseCase.execute(newProject);
+      this.updateProjectByIdUseCase.execute(projectUpdated);
 
-      return res.status(201).json({
-        message: 'Projeto adicionado',
-        newProject,
+      res.status(201).json({
+        message: 'Projeto atualizado.',
+        project: { ...projectUpdated },
       });
     } catch (error) {
       return res
@@ -53,4 +58,4 @@ class CreateProjectController {
   }
 }
 
-export default CreateProjectController;
+export default UpdateProjectByIdController;

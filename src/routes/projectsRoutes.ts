@@ -8,6 +8,7 @@ import listProjectController from '../modules/projects/useCases/ListProjects';
 import projectInTrashByIdController from '../modules/projects/useCases/ProjectInTrashById';
 import listProjectInTrashController from '../modules/projects/useCases/ListProjectsInTrash';
 import projectsByIdController from '../modules/projects/useCases/ProjectById';
+import updateProjectByIdController from '../modules/projects/useCases/UpdateProjectById';
 
 const router = express.Router();
 
@@ -19,6 +20,17 @@ router.post(
   imageUpload.array('photos'),
   async (req: Request, res: Response) => {
     return await createProjectController.handle(req, res);
+  },
+);
+
+router.patch(
+  '/:id',
+  CheckToken.handleCheckToken,
+  // ProjectValidations.handleProjectValidations(),
+  // Validate.handleValidate,
+  imageUpload.array('photos'),
+  async (req: Request, res: Response) => {
+    return await updateProjectByIdController.handle(req, res);
   },
 );
 
