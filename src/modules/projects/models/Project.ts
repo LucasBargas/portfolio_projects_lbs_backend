@@ -3,7 +3,7 @@ import { IProject } from './IProject';
 
 const projectsSchema = new Schema<IProject>(
   {
-    photos: { type: [Object], required: true },
+    photos: { type: [String], required: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
     categories: { type: [String], required: true },

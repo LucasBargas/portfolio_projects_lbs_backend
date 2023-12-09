@@ -7,11 +7,11 @@ class CreateProjectController {
   constructor(private createProjectUseCase: CreateProjectUseCase) {}
 
   async handle(req: Request, res: Response) {
-    const { title, description, appLink, gitHub, categories } = req.body;
+    const { photos, title, description, appLink, gitHub, categories } =
+      req.body;
     const trash = false;
 
     try {
-      const photos = req.files as Express.Multer.File[];
       const titleAlreadyUsed = await Project.findOne({ title });
 
       if (titleAlreadyUsed) {
@@ -23,7 +23,7 @@ class CreateProjectController {
       }
 
       const newProject: IProjectDTO = {
-        photos: [],
+        photos,
         title,
         description,
         categories,
@@ -31,13 +31,6 @@ class CreateProjectController {
         gitHub,
         trash,
       };
-
-      photos.forEach((photo) =>
-        newProject.photos.push({
-          filename: photo.filename,
-          destination: `/uploads/thumbs/${photo.filename}`,
-        }),
-      );
 
       this.createProjectUseCase.execute(newProject);
 

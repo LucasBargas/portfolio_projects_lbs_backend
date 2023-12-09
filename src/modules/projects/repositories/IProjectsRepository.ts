@@ -1,9 +1,6 @@
 export interface IProjectDTO {
   id?: string;
-  photos: {
-    filename: string;
-    destination: string;
-  }[];
+  photos: string[];
   title: string;
   description: string;
   categories: string[];

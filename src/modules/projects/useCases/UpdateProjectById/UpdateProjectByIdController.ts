@@ -9,12 +9,12 @@ class UpdateProjectByIdController {
 
   async handle(req: Request, res: Response) {
     const { id } = req.params;
-    const { title, description, appLink, gitHub, categories } = req.body;
+    const { photos, title, description, appLink, gitHub, categories } =
+      req.body;
 
     try {
       const objId = new mongoose.Types.ObjectId(id);
       const projectById = await Project.findById(objId);
-      const photos = req.files as Express.Multer.File[];
       const titleAlreadyUsed = await Project.findOne({ title });
 
       if (title && title !== projectById.title && titleAlreadyUsed) {
@@ -27,20 +27,13 @@ class UpdateProjectByIdController {
 
       const projectUpdated: IProjectDTO = {
         id,
-        photos: [],
+        photos,
         title,
         description,
         categories,
         appLink,
         gitHub,
       };
-
-      photos.forEach((photo) =>
-        projectUpdated.photos.push({
-          filename: photo.filename,
-          destination: `/uploads/thumbs/${photo.filename}`,
-        }),
-      );
 
       this.updateProjectByIdUseCase.execute(projectUpdated);
 
