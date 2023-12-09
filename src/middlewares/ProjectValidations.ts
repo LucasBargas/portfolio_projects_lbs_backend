@@ -3,58 +3,46 @@ import { body } from 'express-validator';
 export default class ProjectValidations {
   static handleProjectValidations() {
     return [
-      body('photos').custom((value, { req }) => {
-        if (!req.files) {
-          throw new Error('A imagem é obrigatória.');
-        }
-        return true;
-      }),
+      body('photos')
+        .isArray()
+        .withMessage('As fotos do projeto precisam ser definidas')
+        .isLength({ min: 2 })
+        .withMessage('O projeto deve ter pelo menos 2 fotos')
+        .custom((value, { req }) => {
+          if (req.body.photos.length < 2) {
+            throw new Error('O projeto deve ter pelo menos 2 fotos');
+          }
+
+          return true;
+        }),
 
       body('title')
-        .not()
-        .equals('undefined')
-        .withMessage('O título do projeto é obrigatório.')
         .isString()
-        .withMessage('O título do projeto é obrigatório.')
+        .withMessage('O projeto precisa ter um nome')
         .isLength({ min: 3 })
-        .withMessage('O título do projeto precisa ter no mínimo 3 caracteres'),
+        .withMessage('O nome do projeto precisa ter no mínimo 3 caracteres'),
 
       body('description')
-        .not()
-        .equals('undefined')
-        .withMessage('A descrição do projeto é obrigatório.')
         .isString()
-        .withMessage('A descrição do projeto é obrigatório.')
-        .isLength({ min: 10 })
+        .withMessage('O projeto precisa ter uma descrição.')
+        .isLength({ min: 6 })
         .withMessage(
-          'A descrição do projeto precisa ter no mínimo 10 caracteres',
+          'A descrição do projeto precisa ter no mímino 6 caracteres',
         ),
 
       body('appLink')
-        .not()
-        .equals('undefined')
-        .withMessage('O link do projeto é obrigatório')
         .isString()
-        .withMessage('O link do projeto é obrigatório'),
+        .withMessage('Adicione o link para visualização do projeto'),
 
       body('gitHub')
-        .not()
-        .equals('undefined')
-        .withMessage('O link do repositório no Github do projeto é obrigatório')
         .isString()
-        .withMessage(
-          'O link do repositório no Github do projeto é obrigatório',
-        ),
+        .withMessage('Adicione o link do repositório do projeto'),
 
       body('categories')
-        .not()
-        .equals('undefined')
         .isArray()
-        .withMessage('É preciso definir as categorias do projeto')
-        .isLength({ min: 1 })
-        .withMessage(
-          'É preciso definir pelo menos uma categoria para o projeto',
-        ),
+        .withMessage('As categorias do projeto precisam ser definidas')
+        .isLength({ min: 2 })
+        .withMessage('O projeto deve ter pelo menos 2 categorias'),
     ];
   }
 }

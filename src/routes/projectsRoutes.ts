@@ -7,12 +7,16 @@ import listProjectInTrashController from '../modules/projects/useCases/ListProje
 import projectsByIdController from '../modules/projects/useCases/ProjectById';
 import updateProjectByIdController from '../modules/projects/useCases/UpdateProjectById';
 import deleteProjectByIdController from '../modules/projects/useCases/DeleteProjectById';
+import Validate from '../middlewares/Validate';
+import ProjectValidations from '../middlewares/ProjectValidations';
 
 const router = express.Router();
 
 router.post(
   '/create',
   CheckToken.handleCheckToken,
+  ProjectValidations.handleProjectValidations(),
+  Validate.handleValidate,
   async (req: Request, res: Response) => {
     return await createProjectController.handle(req, res);
   },
@@ -21,6 +25,8 @@ router.post(
 router.patch(
   '/:id',
   CheckToken.handleCheckToken,
+  ProjectValidations.handleProjectValidations(),
+  Validate.handleValidate,
   async (req: Request, res: Response) => {
     return await updateProjectByIdController.handle(req, res);
   },
@@ -34,9 +40,13 @@ router.delete(
   },
 );
 
-router.patch('/trash/:id', async (req: Request, res: Response) => {
-  return await projectInTrashByIdController.handle(req, res);
-});
+router.patch(
+  '/trash/:id',
+  CheckToken.handleCheckToken,
+  async (req: Request, res: Response) => {
+    return await projectInTrashByIdController.handle(req, res);
+  },
+);
 
 router.get('/trash', async (req: Request, res: Response) => {
   return await listProjectInTrashController.handle(req, res);
