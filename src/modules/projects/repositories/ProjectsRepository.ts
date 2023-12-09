@@ -95,7 +95,7 @@ class ProjectsRepository implements IProjectRepository {
       const project = await Project.findById(objId);
 
       project.photos.forEach((el) => {
-        fs.unlink(`src/${el.destination}`, function (err) {
+        fs.unlink(`src/${el.destination}`, (err) => {
           if (err) throw err;
         });
       });
