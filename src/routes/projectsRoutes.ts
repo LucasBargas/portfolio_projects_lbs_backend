@@ -35,9 +35,13 @@ router.patch(
   },
 );
 
-router.delete('/:id', async (req: Request, res: Response) => {
-  return await deleteProjectByIdController.handle(req, res);
-});
+router.delete(
+  '/:id',
+  CheckToken.handleCheckToken,
+  async (req: Request, res: Response) => {
+    return await deleteProjectByIdController.handle(req, res);
+  },
+);
 
 router.patch('/trash/:id', async (req: Request, res: Response) => {
   return await projectInTrashByIdController.handle(req, res);
