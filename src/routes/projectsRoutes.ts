@@ -5,7 +5,7 @@ import CheckToken from '../middlewares/CheckToken';
 // import ProjectValidations from '../middlewares/ProjectValidations';
 import imageUpload from '../middlewares/imageUpload';
 import listProjectController from '../modules/projects/useCases/ListProjects';
-import projectInTrashByIdController from '../modules/projects/useCases/ProjectsInTrashById';
+import projectInTrashByIdController from '../modules/projects/useCases/ProjectInTrashById';
 import listProjectInTrashController from '../modules/projects/useCases/ListProjectsInTrash';
 import projectsByIdController from '../modules/projects/useCases/ProjectById';
 

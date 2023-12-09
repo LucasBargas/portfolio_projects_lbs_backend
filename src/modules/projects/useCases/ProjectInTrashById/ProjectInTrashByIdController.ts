@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { Request, Response } from 'express';
-import ProjectInTrashByIdUseCase from './ProjectsInTrashByIdUseCase';
+import ProjectInTrashByIdUseCase from './ProjectInTrashByIdUseCase';
 import { Project } from '../../models/Project';
 
 class ProjectInTrashByIdController {
