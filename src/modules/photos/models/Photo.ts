@@ -9,4 +9,4 @@ const photosSchema = new Schema<IPhoto>(
   { timestamps: true },
 );
 
-export const Photo = model<IPhoto>('photo', photosSchema);
+export const Photo = model<IPhoto>('Photo', photosSchema);
