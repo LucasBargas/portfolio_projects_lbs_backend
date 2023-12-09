@@ -17,8 +17,6 @@ class UpdateProjectByIdController {
       const photos = req.files as Express.Multer.File[];
       const titleAlreadyUsed = await Project.findOne({ title });
 
-      console.log(projectById);
-
       if (title && title !== projectById.title && titleAlreadyUsed) {
         return res.status(422).json({
           errors: [
