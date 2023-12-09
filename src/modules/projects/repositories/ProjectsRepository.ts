@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { IProjectRepository, IProjectDTO } from './IProjectsRepository';
 import { Project } from '../models/Project';
+import fs from 'fs';
 
 class ProjectsRepository implements IProjectRepository {
   constructor() {}
@@ -92,6 +93,12 @@ class ProjectsRepository implements IProjectRepository {
     try {
       const objId = new mongoose.Types.ObjectId(id);
       const project = await Project.findById(objId);
+
+      project.photos.forEach((el) => {
+        fs.unlink(`src/${el.destination}`, function (err) {
+          if (err) throw err;
+        });
+      });
 
       await Project.findByIdAndDelete(objId);
       return project;
