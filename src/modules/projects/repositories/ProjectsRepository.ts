@@ -51,6 +51,17 @@ class ProjectsRepository implements IProjectRepository {
     }
   }
 
+  async ProjectById(id: string): Promise<IProject> {
+    try {
+      const objId = new mongoose.Types.ObjectId(id);
+      const project = await Project.findById(objId);
+
+      return project;
+    } catch (error) {
+      return error;
+    }
+  }
+
   async ProjectInTrashById(id: string): Promise<IProject> {
     try {
       const objId = new mongoose.Types.ObjectId(id);

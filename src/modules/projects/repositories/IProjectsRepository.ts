@@ -28,5 +28,7 @@ export interface IProjectRepository {
 
   ListProjectsInTrash: () => Promise<IProject[]>;
 
+  ProjectById: (id: string) => Promise<IProject>;
+
   ProjectInTrashById: (id: string) => Promise<IProject>;
 }
