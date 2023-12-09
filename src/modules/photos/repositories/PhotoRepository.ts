@@ -32,6 +32,15 @@ class PhotoRepository implements IPhotoRepository {
       return error;
     }
   }
+
+  async listPhotos(): Promise<IPhotoDTO[]> {
+    try {
+      const photos = await Photo.find().sort('-createdAt');
+      return photos;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default PhotoRepository;

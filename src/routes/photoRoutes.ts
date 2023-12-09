@@ -3,6 +3,7 @@ import CheckToken from '../middlewares/CheckToken';
 import imageUpload from '../middlewares/imageUpload';
 import postPhotoController from '../modules/photos/useCases/PostPhoto';
 import deletePhotoByIdController from '../modules/photos/useCases/DeletePhotoById';
+import listPhotosController from '../modules/photos/useCases/ListPhotos';
 
 const router = express.Router();
 
@@ -20,6 +21,14 @@ router.delete(
   CheckToken.handleCheckToken,
   async (req: Request, res: Response) => {
     return await deletePhotoByIdController.handle(req, res);
+  },
+);
+
+router.get(
+  '/',
+  CheckToken.handleCheckToken,
+  async (req: Request, res: Response) => {
+    return await listPhotosController.handle(req, res);
   },
 );
 

@@ -7,4 +7,6 @@ export interface IPhotoRepository {
   postPhoto: ({ filename, destination }: IPhotoDTO) => Promise<IPhotoDTO>;
 
   deletePhotoById: (id: string) => Promise<IPhotoDTO>;
+
+  listPhotos: () => Promise<IPhotoDTO[]>;
 }
