@@ -30,6 +30,6 @@ module.exports = {
       ],
       'class-method-use-this': 'off',
       'prettier/prettier': 'error',
-      'no-console': 'warn',
+      'no-console': 'error',
     },
   };
