@@ -22,7 +22,7 @@ export interface IProjectRepository {
     categories,
     appLink,
     gitHub,
-  }: IProjectDTO) => Promise<IProject>;
+  }: IProjectDTO) => Promise<IProjectDTO>;
 
   updateProjectById: ({
     id,
@@ -32,13 +32,15 @@ export interface IProjectRepository {
     categories,
     appLink,
     gitHub,
-  }: IProjectDTO) => Promise<IProject>;
+  }: IProjectDTO) => Promise<IProjectDTO>;
 
-  listProjects: () => Promise<IProject[]>;
+  deleteProjectById: (id: string) => Promise<IProjectDTO>;
+
+  listProjects: () => Promise<IProjectDTO[]>;
 
   listProjectsInTrash: () => Promise<IProject[]>;
 
-  projectById: (id: string) => Promise<IProject>;
+  projectById: (id: string) => Promise<IProjectDTO>;
 
-  projectInTrashById: (id: string) => Promise<IProject>;
+  projectInTrashById: (id: string) => Promise<IProjectDTO>;
 }

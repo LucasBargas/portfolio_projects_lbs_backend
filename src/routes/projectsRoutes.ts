@@ -9,6 +9,7 @@ import projectInTrashByIdController from '../modules/projects/useCases/ProjectIn
 import listProjectInTrashController from '../modules/projects/useCases/ListProjectsInTrash';
 import projectsByIdController from '../modules/projects/useCases/ProjectById';
 import updateProjectByIdController from '../modules/projects/useCases/UpdateProjectById';
+import deleteProjectByIdController from '../modules/projects/useCases/DeleteProjectById';
 
 const router = express.Router();
 
@@ -33,6 +34,10 @@ router.patch(
     return await updateProjectByIdController.handle(req, res);
   },
 );
+
+router.delete('/:id', async (req: Request, res: Response) => {
+  return await deleteProjectByIdController.handle(req, res);
+});
 
 router.patch('/trash/:id', async (req: Request, res: Response) => {
   return await projectInTrashByIdController.handle(req, res);

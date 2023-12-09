@@ -88,6 +88,18 @@ class ProjectsRepository implements IProjectRepository {
     }
   }
 
+  async deleteProjectById(id: string): Promise<IProjectDTO> {
+    try {
+      const objId = new mongoose.Types.ObjectId(id);
+      const project = await Project.findById(objId);
+
+      await Project.findByIdAndDelete(objId);
+      return project;
+    } catch (error) {
+      return error;
+    }
+  }
+
   async projectInTrashById(id: string): Promise<IProjectDTO> {
     try {
       const objId = new mongoose.Types.ObjectId(id);
