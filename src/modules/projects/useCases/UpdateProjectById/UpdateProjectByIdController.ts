@@ -44,7 +44,7 @@ class UpdateProjectByIdController {
 
       this.updateProjectByIdUseCase.execute(projectUpdated);
 
-      res.status(201).json({
+      return res.status(201).json({
         message: 'Projeto atualizado.',
         project: { ...projectUpdated },
       });

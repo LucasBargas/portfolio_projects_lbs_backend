@@ -20,7 +20,7 @@ class ProjectByIdController {
       }
 
       const project = await this.projectByIdUseCase.execute(String(id));
-      res.status(201).json(project);
+      return res.status(201).json(project);
     } catch (error) {
       return res
         .status(422)
