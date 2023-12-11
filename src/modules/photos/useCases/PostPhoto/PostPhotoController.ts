@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import PostPhotoUseCase from './postPhotoUseCase';
+import PostPhotoUseCase from './PostPhotoUseCase';
 
 class PostPhotoController {
   constructor(private postPhotoUseCase: PostPhotoUseCase) {}

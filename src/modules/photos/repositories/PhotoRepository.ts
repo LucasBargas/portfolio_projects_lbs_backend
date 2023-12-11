@@ -26,7 +26,7 @@ class PhotoRepository implements IPhotoRepository {
         if (err) throw err;
       });
 
-      await Photo.findByIdAndDelete(objId);
+      await photo.deleteOne();
       return photo;
     } catch (error) {
       return error;

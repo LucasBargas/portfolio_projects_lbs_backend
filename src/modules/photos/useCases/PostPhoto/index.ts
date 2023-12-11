@@ -1,5 +1,5 @@
 import PhotoRepository from '../../repositories/PhotoRepository';
-import PostPhotoUseCase from './postPhotoUseCase';
+import PostPhotoUseCase from './PostPhotoUseCase';
 import PostPhotoController from './PostPhotoController';
 
 const photoRepository = new PhotoRepository();

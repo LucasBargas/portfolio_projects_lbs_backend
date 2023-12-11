@@ -93,7 +93,7 @@ class ProjectsRepository implements IProjectRepository {
       const objId = new mongoose.Types.ObjectId(id);
       const project = await Project.findById(objId);
 
-      await Project.findByIdAndDelete(objId);
+      await project.deleteOne();
       return project;
     } catch (error) {
       return error;
