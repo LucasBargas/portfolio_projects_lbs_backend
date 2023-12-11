@@ -6,7 +6,7 @@ import {
 class PostPhotoUseCase {
   constructor(private photoRepository: IPhotoRepository) {}
 
-  async execute({ filename, destination }: IPhotoDTO) {
+  async execute({ filename, destination }: IPhotoDTO): Promise<IPhotoDTO> {
     return await this.photoRepository.postPhoto({ filename, destination });
   }
 }

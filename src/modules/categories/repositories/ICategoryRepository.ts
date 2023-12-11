@@ -4,5 +4,5 @@ export interface ICategoryDTO {
 
 export interface ICategoryRepository {
   createCategory: ({ title }: ICategoryDTO) => Promise<ICategoryDTO>;
-  deleteCategory: (id: string) => Promise<ICategoryDTO>;
+  deleteCategoryById: (id: string) => Promise<ICategoryDTO>;
 }

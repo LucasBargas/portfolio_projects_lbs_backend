@@ -16,7 +16,7 @@ class CategoryRepository implements ICategoryRepository {
     }
   }
 
-  async deleteCategory(id: string): Promise<ICategoryDTO> {
+  async deleteCategoryById(id: string): Promise<ICategoryDTO> {
     try {
       const objId = new mongoose.Types.ObjectId(id);
       const category = await Category.findById(objId);
