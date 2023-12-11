@@ -15,28 +15,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const CreateProject_1 = __importDefault(require("../modules/projects/useCases/CreateProject"));
 const CheckToken_1 = __importDefault(require("../middlewares/CheckToken"));
-// import Validate from '../middlewares/Validate';
-// import ProjectValidations from '../middlewares/ProjectValidations';
-const imageUpload_1 = __importDefault(require("../middlewares/imageUpload"));
 const ListProjects_1 = __importDefault(require("../modules/projects/useCases/ListProjects"));
 const ProjectInTrashById_1 = __importDefault(require("../modules/projects/useCases/ProjectInTrashById"));
 const ListProjectsInTrash_1 = __importDefault(require("../modules/projects/useCases/ListProjectsInTrash"));
 const ProjectById_1 = __importDefault(require("../modules/projects/useCases/ProjectById"));
 const UpdateProjectById_1 = __importDefault(require("../modules/projects/useCases/UpdateProjectById"));
+const DeleteProjectById_1 = __importDefault(require("../modules/projects/useCases/DeleteProjectById"));
+const Validate_1 = __importDefault(require("../middlewares/Validate"));
+const ProjectValidations_1 = __importDefault(require("../middlewares/ProjectValidations"));
 const router = express_1.default.Router();
-router.post('/create', CheckToken_1.default.handleCheckToken, 
-// ProjectValidations.handleProjectValidations(),
-// Validate.handleValidate,
-imageUpload_1.default.array('photos'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.post('/create', CheckToken_1.default.handleCheckToken, ProjectValidations_1.default.handleProjectValidations(), Validate_1.default.handleValidate, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return yield CreateProject_1.default.handle(req, res);
 }));
-router.patch('/:id', CheckToken_1.default.handleCheckToken, 
-// ProjectValidations.handleProjectValidations(),
-// Validate.handleValidate,
-imageUpload_1.default.array('photos'), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.patch('/:id', CheckToken_1.default.handleCheckToken, ProjectValidations_1.default.handleProjectValidations(), Validate_1.default.handleValidate, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return yield UpdateProjectById_1.default.handle(req, res);
 }));
-router.patch('/trash/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.delete('/:id', CheckToken_1.default.handleCheckToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield DeleteProjectById_1.default.handle(req, res);
+}));
+router.patch('/trash/:id', CheckToken_1.default.handleCheckToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return yield ProjectInTrashById_1.default.handle(req, res);
 }));
 router.get('/trash', (req, res) => __awaiter(void 0, void 0, void 0, function* () {

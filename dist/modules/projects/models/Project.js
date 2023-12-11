@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Project = void 0;
 const mongoose_1 = require("mongoose");
 const projectsSchema = new mongoose_1.Schema({
-    photos: { type: [Object], required: true },
+    photos: { type: [String], required: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
     categories: { type: [String], required: true },

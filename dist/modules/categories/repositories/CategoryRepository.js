@@ -13,31 +13,44 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const Project_1 = require("../../models/Project");
-class ProjectInTrashByIdController {
-    constructor(projectInTrashByIdUseCase) {
-        this.projectInTrashByIdUseCase = projectInTrashByIdUseCase;
-    }
-    handle(req, res) {
+const Category_1 = require("../models/Category");
+class CategoryRepository {
+    constructor() { }
+    createCategory({ title }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
             try {
-                const objId = new mongoose_1.default.Types.ObjectId(id);
-                const projectById = yield Project_1.Project.findById(objId);
-                if (!projectById) {
-                    return res.status(422).json({
-                        errors: ['Nenhum projeto localizado ou ID inválido'],
-                    });
-                }
-                const project = yield this.projectInTrashByIdUseCase.execute(String(id));
-                return res.status(201).json(project);
+                const newCategory = { title };
+                yield Category_1.Category.create(newCategory);
+                return newCategory;
             }
             catch (error) {
-                return res
-                    .status(422)
-                    .json({ errors: ['Houve um erro, tente novamente mais tarde!'] });
+                return error;
+            }
+        });
+    }
+    deleteCategoryById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const objId = new mongoose_1.default.Types.ObjectId(id);
+                const category = yield Category_1.Category.findById(objId);
+                yield category.deleteOne();
+                return category;
+            }
+            catch (error) {
+                return error;
+            }
+        });
+    }
+    listCategories() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const categories = yield Category_1.Category.find().sort('-createdAt');
+                return categories;
+            }
+            catch (error) {
+                return error;
             }
         });
     }
 }
-exports.default = ProjectInTrashByIdController;
+exports.default = CategoryRepository;

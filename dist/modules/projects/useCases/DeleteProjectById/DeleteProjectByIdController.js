@@ -14,9 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Project_1 = require("../../models/Project");
-class ProjectInTrashByIdController {
-    constructor(projectInTrashByIdUseCase) {
-        this.projectInTrashByIdUseCase = projectInTrashByIdUseCase;
+class DeleteProjectByIdController {
+    constructor(deleteProjectByIdUseCase) {
+        this.deleteProjectByIdUseCase = deleteProjectByIdUseCase;
     }
     handle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -29,8 +29,11 @@ class ProjectInTrashByIdController {
                         errors: ['Nenhum projeto localizado ou ID inválido'],
                     });
                 }
-                const project = yield this.projectInTrashByIdUseCase.execute(String(id));
-                return res.status(201).json(project);
+                const project = yield this.deleteProjectByIdUseCase.execute(id);
+                return res.status(201).json({
+                    message: 'Projeto deletado',
+                    project,
+                });
             }
             catch (error) {
                 return res
@@ -40,4 +43,4 @@ class ProjectInTrashByIdController {
         });
     }
 }
-exports.default = ProjectInTrashByIdController;
+exports.default = DeleteProjectByIdController;

@@ -16,10 +16,9 @@ class CreateProjectController {
     }
     handle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { title, description, appLink, gitHub, categories } = req.body;
+            const { photos, title, description, appLink, gitHub, categories } = req.body;
             const trash = false;
             try {
-                const photos = req.files;
                 const titleAlreadyUsed = yield Project_1.Project.findOne({ title });
                 if (titleAlreadyUsed) {
                     return res.status(422).json({
@@ -29,7 +28,7 @@ class CreateProjectController {
                     });
                 }
                 const newProject = {
-                    photos: [],
+                    photos,
                     title,
                     description,
                     categories,
@@ -37,10 +36,6 @@ class CreateProjectController {
                     gitHub,
                     trash,
                 };
-                photos.forEach((photo) => newProject.photos.push({
-                    filename: photo.filename,
-                    destination: `/uploads/thumbs/${photo.filename}`,
-                }));
                 this.createProjectUseCase.execute(newProject);
                 return res.status(201).json({
                     message: 'Projeto adicionado',

@@ -19,7 +19,8 @@ class ListProjectsInTrashController {
                 const projects = yield this.listProjectsInTrashUseCase.execute();
                 if (!projects || projects.length === 0) {
                     return res.status(422).json({
-                        errors: ['Ainda não foram adicionados projetos na lixeira'],
+                        total: projects.length,
+                        errors: ['Ainda não foram adicionados projetos'],
                     });
                 }
                 return res.status(201).json({

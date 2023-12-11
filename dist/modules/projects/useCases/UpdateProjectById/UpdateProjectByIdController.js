@@ -21,11 +21,10 @@ class UpdateProjectByIdController {
     handle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const { title, description, appLink, gitHub, categories } = req.body;
+            const { photos, title, description, appLink, gitHub, categories } = req.body;
             try {
                 const objId = new mongoose_1.default.Types.ObjectId(id);
                 const projectById = yield Project_1.Project.findById(objId);
-                const photos = req.files;
                 const titleAlreadyUsed = yield Project_1.Project.findOne({ title });
                 if (title && title !== projectById.title && titleAlreadyUsed) {
                     return res.status(422).json({
@@ -36,19 +35,15 @@ class UpdateProjectByIdController {
                 }
                 const projectUpdated = {
                     id,
-                    photos: [],
+                    photos,
                     title,
                     description,
                     categories,
                     appLink,
                     gitHub,
                 };
-                photos.forEach((photo) => projectUpdated.photos.push({
-                    filename: photo.filename,
-                    destination: `/uploads/thumbs/${photo.filename}`,
-                }));
                 this.updateProjectByIdUseCase.execute(projectUpdated);
-                res.status(201).json({
+                return res.status(201).json({
                     message: 'Projeto atualizado.',
                     project: Object.assign({}, projectUpdated),
                 });

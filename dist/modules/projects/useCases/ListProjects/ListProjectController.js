@@ -19,6 +19,7 @@ class ListProjectController {
                 const projects = yield this.listProjectUseCase.execute();
                 if (!projects || projects.length === 0) {
                     return res.status(422).json({
+                        total: projects.length,
                         errors: ['Ainda não foram adicionados projetos'],
                     });
                 }

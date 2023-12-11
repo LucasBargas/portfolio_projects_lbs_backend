@@ -13,24 +13,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const Project_1 = require("../../models/Project");
-class ProjectInTrashByIdController {
-    constructor(projectInTrashByIdUseCase) {
-        this.projectInTrashByIdUseCase = projectInTrashByIdUseCase;
+const Category_1 = require("../../models/Category");
+class DeleteCategoryByIdController {
+    constructor(deleteCategoryUseCase) {
+        this.deleteCategoryUseCase = deleteCategoryUseCase;
     }
     handle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             try {
                 const objId = new mongoose_1.default.Types.ObjectId(id);
-                const projectById = yield Project_1.Project.findById(objId);
-                if (!projectById) {
+                const categoryById = yield Category_1.Category.findById(objId);
+                if (!categoryById) {
                     return res.status(422).json({
-                        errors: ['Nenhum projeto localizado ou ID inválido'],
+                        errors: ['Nenhuma categoria localizada ou ID inválido.'],
                     });
                 }
-                const project = yield this.projectInTrashByIdUseCase.execute(String(id));
-                return res.status(201).json(project);
+                const category = yield this.deleteCategoryUseCase.execute(id);
+                return res.status(201).json({
+                    message: 'Categoria deletada',
+                    category,
+                });
             }
             catch (error) {
                 return res
@@ -40,4 +43,4 @@ class ProjectInTrashByIdController {
         });
     }
 }
-exports.default = ProjectInTrashByIdController;
+exports.default = DeleteCategoryByIdController;

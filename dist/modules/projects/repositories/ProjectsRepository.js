@@ -89,6 +89,19 @@ class ProjectsRepository {
             }
         });
     }
+    deleteProjectById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const objId = new mongoose_1.default.Types.ObjectId(id);
+                const project = yield Project_1.Project.findById(objId);
+                yield project.deleteOne();
+                return project;
+            }
+            catch (error) {
+                return error;
+            }
+        });
+    }
     projectInTrashById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

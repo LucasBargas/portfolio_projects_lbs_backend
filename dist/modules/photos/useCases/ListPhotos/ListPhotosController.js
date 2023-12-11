@@ -8,29 +8,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const Project_1 = require("../../models/Project");
-class ProjectInTrashByIdController {
-    constructor(projectInTrashByIdUseCase) {
-        this.projectInTrashByIdUseCase = projectInTrashByIdUseCase;
+class ListPhotosController {
+    constructor(listPhotosUseCase) {
+        this.listPhotosUseCase = listPhotosUseCase;
     }
     handle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
             try {
-                const objId = new mongoose_1.default.Types.ObjectId(id);
-                const projectById = yield Project_1.Project.findById(objId);
-                if (!projectById) {
+                const photos = yield this.listPhotosUseCase.execute();
+                if (!photos || photos.length === 0) {
                     return res.status(422).json({
-                        errors: ['Nenhum projeto localizado ou ID inválido'],
+                        total: photos.length,
+                        errors: ['Ainda não foram adicionadas fotos.'],
                     });
                 }
-                const project = yield this.projectInTrashByIdUseCase.execute(String(id));
-                return res.status(201).json(project);
+                return res.status(201).json({
+                    total: photos.length,
+                    photos,
+                });
             }
             catch (error) {
                 return res
@@ -40,4 +36,4 @@ class ProjectInTrashByIdController {
         });
     }
 }
-exports.default = ProjectInTrashByIdController;
+exports.default = ListPhotosController;
