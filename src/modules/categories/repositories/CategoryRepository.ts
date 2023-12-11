@@ -27,6 +27,15 @@ class CategoryRepository implements ICategoryRepository {
       return error;
     }
   }
+
+  async listCategories(): Promise<ICategoryDTO[]> {
+    try {
+      const categories = await Category.find().sort('-createdAt');
+      return categories;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default CategoryRepository;
