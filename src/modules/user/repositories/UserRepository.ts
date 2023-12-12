@@ -19,7 +19,7 @@ class UserRepository implements IUserRepository {
     fullName,
     bio,
     linkedin,
-    github,
+    gitHub,
     whatsapp,
   }: IUserDTO): Promise<IUserDTO> {
     try {
@@ -31,7 +31,7 @@ class UserRepository implements IUserRepository {
       user.fullName = fullName;
       user.bio = bio;
       user.linkedin = linkedin;
-      user.github = github;
+      user.gitHub = gitHub;
       user.whatsapp = whatsapp;
 
       await user.save();

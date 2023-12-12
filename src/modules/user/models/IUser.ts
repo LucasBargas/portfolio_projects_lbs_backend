@@ -7,6 +7,6 @@ export interface IUser extends Partial<Document> {
   fullName?: string;
   bio?: string;
   linkedin?: string;
-  github?: string;
+  gitHub?: string;
   whatsapp?: string;
 }

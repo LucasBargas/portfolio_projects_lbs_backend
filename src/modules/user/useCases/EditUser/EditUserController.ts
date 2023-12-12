@@ -8,7 +8,7 @@ class EditUserController {
 
   async handle(req: Request, res: Response) {
     const { id } = req.params;
-    const { email, username, fullName, bio, linkedin, github, whatsapp } =
+    const { email, username, fullName, bio, linkedin, gitHub, whatsapp } =
       req.body;
 
     try {
@@ -40,7 +40,7 @@ class EditUserController {
         fullName,
         bio,
         linkedin,
-        github,
+        gitHub,
         whatsapp,
       });
 

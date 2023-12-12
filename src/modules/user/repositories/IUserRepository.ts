@@ -6,7 +6,7 @@ export interface IUserDTO {
   fullName?: string;
   bio?: string;
   linkedin?: string;
-  github?: string;
+  gitHub?: string;
   whatsapp?: string;
 }
 
@@ -20,7 +20,7 @@ export interface IUserRepository {
     fullName,
     bio,
     linkedin,
-    github,
+    gitHub,
     whatsapp,
   }: IUserDTO) => Promise<IUserDTO>;
   loginUser: ({ username, password }: IUserDTO) => Promise<IUserDTO>;

@@ -10,7 +10,7 @@ class EditUserUseCase {
     fullName,
     bio,
     linkedin,
-    github,
+    gitHub,
     whatsapp,
   }: IUserDTO): Promise<IUserDTO> {
     return await this.userRepository.editUser({
@@ -20,7 +20,7 @@ class EditUserUseCase {
       fullName,
       bio,
       linkedin,
-      github,
+      gitHub,
       whatsapp,
     });
   }
