@@ -1,7 +1,7 @@
 import { body } from 'express-validator';
 
-export default class RegisterValidations {
-  static handleRegisterValidations() {
+export default class EditUserValidations {
+  static handleEditUserValidations() {
     return [
       body('email')
         .isString()
@@ -39,22 +39,6 @@ export default class RegisterValidations {
             );
           }
 
-          return true;
-        }),
-
-      body('password')
-        .isString()
-        .withMessage('A senha é obrigatória')
-        .isLength({ min: 6 })
-        .withMessage('A senha precisa ter no mínimo 6 caracteres'),
-
-      body('confirmPassword')
-        .isString()
-        .withMessage('A confirmação de senha é obrigatória')
-        .custom((value, { req }) => {
-          if (value !== req.body.password) {
-            throw new Error('As senhas devem ser iguais');
-          }
           return true;
         }),
     ];

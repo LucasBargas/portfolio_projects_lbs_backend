@@ -9,18 +9,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-class CreateUserUseCase {
+class EditUserUseCase {
     constructor(userRepository) {
         this.userRepository = userRepository;
     }
-    execute({ email, username, password }) {
+    execute({ id, email, username, fullName, bio, linkedin, github, whatsapp, }) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.userRepository.createUser({
+            return yield this.userRepository.editUser({
+                id,
                 email,
                 username,
-                password,
+                fullName,
+                bio,
+                linkedin,
+                github,
+                whatsapp,
             });
         });
     }
 }
-exports.default = CreateUserUseCase;
+exports.default = EditUserUseCase;

@@ -38,9 +38,7 @@ class CreateUserController {
                 }
                 yield this.loginUserUseCase.execute(user);
                 const token = yield CreateUserToken_1.default.handleCreateUserToken(user);
-                return res
-                    .status(201)
-                    .json({ user, token, message: 'Você está autenticado.' });
+                return res.status(201).json({ token, message: 'Você está autenticado.' });
             }
             catch (error) {
                 return res

@@ -13,16 +13,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const CheckToken_1 = __importDefault(require("../middlewares/CheckToken"));
 const CreateUser_1 = __importDefault(require("../modules/user/useCases/CreateUser"));
 const LoginUser_1 = __importDefault(require("../modules/user/useCases/LoginUser"));
 const Validate_1 = __importDefault(require("../middlewares/Validate"));
 const RegisterValidations_1 = __importDefault(require("../middlewares/RegisterValidations"));
 const LoginValidations_1 = __importDefault(require("../middlewares/LoginValidations"));
+const EditUser_1 = __importDefault(require("../modules/user/useCases/EditUser"));
+const EditUserValidations_1 = __importDefault(require("../middlewares/EditUserValidations"));
 const router = express_1.default.Router();
 router.post('/register', RegisterValidations_1.default.handleRegisterValidations(), Validate_1.default.handleValidate, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return yield CreateUser_1.default.handle(req, res);
 }));
 router.post('/login', LoginValidations_1.default.handleLoginValidations(), Validate_1.default.handleValidate, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return yield LoginUser_1.default.handle(req, res);
+}));
+router.patch('/:id', CheckToken_1.default.handleCheckToken, EditUserValidations_1.default.handleEditUserValidations(), Validate_1.default.handleValidate, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield EditUser_1.default.handle(req, res);
 }));
 exports.default = router;

@@ -1,11 +1,27 @@
-import { IUser } from '../models/IUser';
-
 export interface IUserDTO {
+  id?: string;
+  email?: string;
   username: string;
-  password: string;
+  password?: string;
+  fullName?: string;
+  bio?: string;
+  linkedin?: string;
+  github?: string;
+  whatsapp?: string;
 }
 
 export interface IUserRepository {
-  createUser: ({ username, password }: IUserDTO) => Promise<IUser>;
-  loginUser: ({ username, password }: IUserDTO) => Promise<IUser>;
+  createUser: ({ email, username, password }: IUserDTO) => Promise<IUserDTO>;
+  editUser: ({
+    id,
+    email,
+    username,
+    password,
+    fullName,
+    bio,
+    linkedin,
+    github,
+    whatsapp,
+  }: IUserDTO) => Promise<IUserDTO>;
+  loginUser: ({ username, password }: IUserDTO) => Promise<IUserDTO>;
 }

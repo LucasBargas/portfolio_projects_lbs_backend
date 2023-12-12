@@ -31,9 +31,7 @@ class CreateUserController {
       await this.loginUserUseCase.execute(user);
       const token = await CreateUserToken.handleCreateUserToken(user);
 
-      return res
-        .status(201)
-        .json({ user, token, message: 'Você está autenticado.' });
+      return res.status(201).json({ token, message: 'Você está autenticado.' });
     } catch (error) {
       return res
         .status(422)

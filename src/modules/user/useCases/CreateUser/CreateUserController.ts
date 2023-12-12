@@ -8,10 +8,17 @@ class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
   async handle(req: Request, res: Response) {
-    const { username, password } = req.body;
+    const { email, username, password } = req.body;
 
     try {
+      const emailAlreadyUsed = await User.findOne({ email });
       const usernameAlreadyUsed = await User.findOne({ username });
+
+      if (emailAlreadyUsed) {
+        return res.status(422).json({
+          errors: ['E-mail já cadastrado! Por favor, defina outro'],
+        });
+      }
 
       if (usernameAlreadyUsed) {
         return res.status(422).json({
@@ -23,6 +30,7 @@ class CreateUserController {
       const passwordHash = await bcrypt.hash(password, salt);
 
       const user = await this.createUserUseCase.execute({
+        email,
         username,
         password: passwordHash,
       });

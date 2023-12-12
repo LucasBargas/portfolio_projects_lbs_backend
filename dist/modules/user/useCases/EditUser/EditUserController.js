@@ -12,40 +12,49 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const bcrypt_1 = __importDefault(require("bcrypt"));
-const CreateUserToken_1 = __importDefault(require("../../../../helpers/CreateUserToken"));
+const mongoose_1 = __importDefault(require("mongoose"));
 const User_1 = require("../../models/User");
-class CreateUserController {
-    constructor(createUserUseCase) {
-        this.createUserUseCase = createUserUseCase;
+class EditUserController {
+    constructor(editUserUseCase) {
+        this.editUserUseCase = editUserUseCase;
     }
     handle(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { email, username, password } = req.body;
+            const { id } = req.params;
+            const { email, username, fullName, bio, linkedin, github, whatsapp } = req.body;
             try {
+                const objId = new mongoose_1.default.Types.ObjectId(id);
+                const userById = yield User_1.User.findById(objId);
                 const emailAlreadyUsed = yield User_1.User.findOne({ email });
                 const usernameAlreadyUsed = yield User_1.User.findOne({ username });
-                if (emailAlreadyUsed) {
+                if (email && email !== userById.email && emailAlreadyUsed) {
                     return res.status(422).json({
-                        errors: ['E-mail já cadastrado! Por favor, defina outro'],
+                        errors: [
+                            'Já existe um usuário com este e-mail! Por favor, defina outro',
+                        ],
                     });
                 }
-                if (usernameAlreadyUsed) {
+                if (username && username !== userById.username && usernameAlreadyUsed) {
                     return res.status(422).json({
-                        errors: ['Nome de usuário já cadastrado! Por favor, defina outro'],
+                        errors: [
+                            'Este nome de usuário já está em uso! Por favor, defina outro',
+                        ],
                     });
                 }
-                const salt = yield bcrypt_1.default.genSalt(12);
-                const passwordHash = yield bcrypt_1.default.hash(password, salt);
-                const user = yield this.createUserUseCase.execute({
+                const user = yield this.editUserUseCase.execute({
+                    id,
                     email,
                     username,
-                    password: passwordHash,
+                    fullName,
+                    bio,
+                    linkedin,
+                    github,
+                    whatsapp,
                 });
-                const token = yield CreateUserToken_1.default.handleCreateUserToken(user);
-                return res
-                    .status(201)
-                    .json({ user, token, message: 'Você está autenticado.' });
+                return res.status(201).json({
+                    message: 'Usuário atualizado.',
+                    user,
+                });
             }
             catch (error) {
                 return res
@@ -55,4 +64,4 @@ class CreateUserController {
         });
     }
 }
-exports.default = CreateUserController;
+exports.default = EditUserController;
