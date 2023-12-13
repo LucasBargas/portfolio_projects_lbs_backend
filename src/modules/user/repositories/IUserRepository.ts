@@ -12,6 +12,7 @@ export interface IUserDTO {
 
 export interface IUserRepository {
   createUser: ({ email, username, password }: IUserDTO) => Promise<IUserDTO>;
+
   editUser: ({
     id,
     email,
@@ -23,5 +24,8 @@ export interface IUserRepository {
     gitHub,
     whatsapp,
   }: IUserDTO) => Promise<IUserDTO>;
+
   loginUser: ({ username, password }: IUserDTO) => Promise<IUserDTO>;
+
+  getUser: () => Promise<IUserDTO>;
 }

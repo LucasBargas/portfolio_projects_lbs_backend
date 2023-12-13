@@ -45,6 +45,15 @@ class UserRepository implements IUserRepository {
     const user = { username, password };
     return user;
   }
+
+  async getUser(): Promise<IUserDTO> {
+    try {
+      const user = await User.find();
+      return user[0];
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default UserRepository;

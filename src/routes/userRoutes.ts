@@ -7,6 +7,7 @@ import RegisterValidations from '../middlewares/RegisterValidations';
 import LoginValidations from '../middlewares/LoginValidations';
 import editUserController from '../modules/user/useCases/EditUser';
 import EditUserValidations from '../middlewares/EditUserValidations';
+import getUserController from '../modules/user/useCases/GetUser';
 
 const router = express.Router();
 
@@ -37,5 +38,9 @@ router.patch(
     return await editUserController.handle(req, res);
   },
 );
+
+router.get('/', async (req: Request, res: Response) => {
+  return await getUserController.handle(req, res);
+});
 
 export default router;
