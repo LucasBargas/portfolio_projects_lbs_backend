@@ -9,8 +9,15 @@ class UpdateProjectByIdController {
 
   async handle(req: Request, res: Response) {
     const { id } = req.params;
-    const { photos, title, description, appLink, gitHub, categories } =
-      req.body;
+    const {
+      photos,
+      title,
+      description,
+      appLink,
+      frontEndRepo,
+      backEndRepo,
+      categories,
+    } = req.body;
 
     try {
       const objId = new mongoose.Types.ObjectId(id);
@@ -32,7 +39,8 @@ class UpdateProjectByIdController {
         description,
         categories,
         appLink,
-        gitHub,
+        frontEndRepo,
+        backEndRepo,
       };
 
       this.updateProjectByIdUseCase.execute(projectUpdated);

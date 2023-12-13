@@ -7,8 +7,15 @@ class CreateProjectController {
   constructor(private createProjectUseCase: CreateProjectUseCase) {}
 
   async handle(req: Request, res: Response) {
-    const { photos, title, description, appLink, gitHub, categories } =
-      req.body;
+    const {
+      photos,
+      title,
+      description,
+      appLink,
+      frontEndRepo,
+      backEndRepo,
+      categories,
+    } = req.body;
     const trash = false;
 
     try {
@@ -28,7 +35,8 @@ class CreateProjectController {
         description,
         categories,
         appLink,
-        gitHub,
+        frontEndRepo,
+        backEndRepo,
         trash,
       };
 

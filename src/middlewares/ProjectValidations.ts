@@ -34,9 +34,13 @@ export default class ProjectValidations {
         .isString()
         .withMessage('Adicione o link para visualização do projeto'),
 
-      body('gitHub')
+      body('frontEndRepo')
         .isString()
-        .withMessage('Adicione o link do repositório do projeto'),
+        .withMessage('Adicione o link do repositório do Front End'),
+
+      body('backEndRepo')
+        .isString()
+        .withMessage('Adicione o link do repositório do Back End'),
 
       body('categories')
         .isArray()

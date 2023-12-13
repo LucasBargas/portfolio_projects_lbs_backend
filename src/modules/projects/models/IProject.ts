@@ -7,6 +7,7 @@ export interface IProject extends Partial<Document> {
   description: string;
   categories: string[];
   appLink: string;
-  gitHub: string;
+  frontEndRepo: string;
+  backEndRepo: string;
   trash?: boolean;
 }

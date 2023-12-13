@@ -12,7 +12,8 @@ class CreateProjectUseCase {
     description,
     categories,
     appLink,
-    gitHub,
+    frontEndRepo,
+    backEndRepo,
     trash,
   }: IProjectDTO): Promise<IProjectDTO> {
     return await this.projectRepositoru.createProject({
@@ -21,7 +22,8 @@ class CreateProjectUseCase {
       description,
       categories,
       appLink,
-      gitHub,
+      frontEndRepo,
+      backEndRepo,
       trash,
     });
   }

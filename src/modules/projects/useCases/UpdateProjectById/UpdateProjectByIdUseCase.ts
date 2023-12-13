@@ -13,7 +13,8 @@ class UpdateProjectByIdUseCase {
     description,
     categories,
     appLink,
-    gitHub,
+    frontEndRepo,
+    backEndRepo,
     trash,
   }: IProjectDTO): Promise<IProjectDTO> {
     return await this.projectRepository.updateProjectById({
@@ -23,7 +24,8 @@ class UpdateProjectByIdUseCase {
       description,
       categories,
       appLink,
-      gitHub,
+      frontEndRepo,
+      backEndRepo,
       trash,
     });
   }

@@ -11,7 +11,8 @@ class ProjectsRepository implements IProjectRepository {
     description,
     categories,
     appLink,
-    gitHub,
+    frontEndRepo,
+    backEndRepo,
     trash,
   }: IProjectDTO): Promise<IProjectDTO> {
     try {
@@ -21,7 +22,8 @@ class ProjectsRepository implements IProjectRepository {
         description,
         categories,
         appLink,
-        gitHub,
+        frontEndRepo,
+        backEndRepo,
         trash,
       };
 
@@ -39,7 +41,8 @@ class ProjectsRepository implements IProjectRepository {
     description,
     categories,
     appLink,
-    gitHub,
+    frontEndRepo,
+    backEndRepo,
   }: IProjectDTO): Promise<IProjectDTO> {
     try {
       const objId = new mongoose.Types.ObjectId(id);
@@ -50,7 +53,8 @@ class ProjectsRepository implements IProjectRepository {
       project.description = description;
       project.categories = categories;
       project.appLink = appLink;
-      project.gitHub = gitHub;
+      project.frontEndRepo = frontEndRepo;
+      project.backEndRepo = backEndRepo;
 
       await project.save();
       return project;

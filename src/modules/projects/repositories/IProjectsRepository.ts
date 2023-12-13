@@ -5,7 +5,8 @@ export interface IProjectDTO {
   description: string;
   categories: string[];
   appLink: string;
-  gitHub: string;
+  frontEndRepo: string;
+  backEndRepo: string;
   trash?: boolean;
 }
 
@@ -16,7 +17,8 @@ export interface IProjectRepository {
     description,
     categories,
     appLink,
-    gitHub,
+    frontEndRepo,
+    backEndRepo,
   }: IProjectDTO) => Promise<IProjectDTO>;
 
   updateProjectById: ({
@@ -26,7 +28,8 @@ export interface IProjectRepository {
     description,
     categories,
     appLink,
-    gitHub,
+    frontEndRepo,
+    backEndRepo,
   }: IProjectDTO) => Promise<IProjectDTO>;
 
   deleteProjectById: (id: string) => Promise<IProjectDTO>;
